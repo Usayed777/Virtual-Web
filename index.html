@@ -1,0 +1,237 @@
+
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Virtual Events</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <style>
+        body{
+            scroll-behavior: smooth;
+        }
+		.container{
+			display: flex;
+			padding-top: 2rem;
+            padding-bottom: 4rem;
+			padding-left: 6rem;
+			padding-right: 6rem;
+            gap: 10rem;
+            align-items: center;
+
+		}
+		.logo{
+			width: 500px;
+			height: 500px;
+            border-radius: 9999px;
+		}
+		.input-fields{
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			display: flex;
+			align-items: center;
+			gap: 2rem;
+		}
+		.field{
+			min-width: 400px;
+		}
+        #header img {
+            max-width: 600px;
+            height: 300px;
+            display: block;
+            margin: 50px auto 10; /* Adjust the top margin to move the image down */
+        }
+
+        .content-container{
+            display: flex;
+            flex-direction: column;
+            gap: 8rem;
+            align-items: center;
+        }
+        .event-btn{
+            border: 1px solid cyan;
+            border-radius: 50px;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+        .event-btn:hover{
+            border: 1px solid cyan;
+        }
+        .intro-container{
+            background-color: white;
+            border-radius: 50px;
+            padding: 4rem;
+            box-shadow: 20px 10px 40px cyan;
+        }
+        .contact-us-container{
+            display: flex;
+            padding-top: 2rem;
+            justify-content: space-between;
+        }
+        .contact-us-container a,h3,h4{
+            color: white;
+            margin: 0;
+        }
+
+        .navbar{
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            padding-left: 6rem;
+            display: flex;
+            gap: 10rem;
+            align-items: center;
+        }
+        .navbar h2,h4{
+            color: white;
+        }
+        .navbar h2,h4:hover{
+             color: cyan;
+             text-decoration: underline;
+        }
+    </style>
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <div class="navbar">
+        <div><a href="index.html"><h2 style="margin: 0;color: white;text-decoration: none;">Virtual <span style="color: cyan;">Umbrella</span></h2></a></div>
+        <div style="display: flex; align-items: center; gap: 30px;">
+            <a href="#features"><h4>Features</h4></a>
+            <a href="#about-us"><h4>About Us</h4></a>
+            <a href="forms.html"><h4>Events</h4></a>
+            <a href="#contact-us"><h4>Contact Us</h4></a>
+        </div>
+    </div>
+</head>
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div class="fade-in">
+
+ 
+
+    <!-- Intro -->
+		<div class="container">
+                <div style="display: flex; flex-direction: column; gap: 20px; max-width: 700px;">
+                    <h1 style="color: white;">Elevate Virtual Experiences</h1>
+                    <h3 style="color: rgb(188, 188, 210); text-transform: none; max-width: 600px;">Join us on a journey of innovation, where every event leaves a lasting impact and propels you towards unparalleled success.</h3>
+                </div>
+			<div>
+                <img src="images/vir.jpg" alt="" class="logo">
+			</div>
+		</div>
+
+        <div style="padding: 0 6rem 0 6rem; padding-top: 4rem;" id="features">
+            <div style="text-align: center;">
+                <h2 style="color: white;">Features</h2>
+            </div>
+            <div style="width: 100%; display: flex; flex-direction: column; gap: 8rem; margin-top: 4rem;">
+                <div style="height: 300px; width: 600px; background-color: white; padding: 2rem; border-radius: 50px; box-shadow: 0 0 20px cyan;">
+                    <p style="color: rgb(70, 119, 133); text-transform: none; font-weight: 600;">At Virtual Umbrella, we take pride in pioneering the future of online events. Our dedicated team is driven by a shared passion for creating extraordinary virtual experiences that transcend boundaries. With a wealth of expertise in event management and cutting-edge technology, we seamlessly blend creativity with innovation.</p>
+                </div>
+                <div style="width: 100%; align-self: center; height: 300px; width: 600px; background-color: white; padding: 2rem; border-radius: 50px; box-shadow: 0 0 20px cyan;">
+                    <p style="color: rgb(70, 119, 133); text-transform: none; font-weight: 600;">Whether you're planning a conference, workshop, or any virtual gathering, we're here to transform your vision into a captivating reality. Our commitment to excellence and attention to detail ensure that each event is not just hosted but curated with precision.</p>
+                </div>
+                <div style="align-self: self-end; height: 300px; width: 600px; background-color: white; padding: 2rem; border-radius: 50px; box-shadow: 0 0 20px cyan;">
+                    <p style="color: rgb(70, 119, 133); text-transform: none; font-weight: 600;">Join us in the realm where imagination meets technology, and together, let's craft events that leave lasting impressions. Virtual Umbrella – where innovation and connection converge.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="padding: 0 6rem 0 6rem; padding-top: 4rem; margin-top: 2rem;" id="about-us">
+            <div style="text-align: center;">
+                <h2 style="color: white;">About Us</h2>
+            </div>
+            <div style="width: 100%; display: flex; flex-direction: row; gap: 4rem; margin-top: 4rem; justify-content: center;">
+                <div >
+                    <img src="images/team.jpeg" alt="team.jpg" style="width: 500px; height: 500px; object-fit: contain;">
+                </div>
+                <div>
+                    <img src="images/services.jpeg" alt="services.jpg" style="width: 500px; height: 500px; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+
+    <!-- Main -->
+    <div id="main">
+        <div class="content-container">
+            <div>
+                <a href="forms.html">
+                    <button class="event-btn">
+                        <span style="color: white; margin: 15rem; font-size: 1.5em;">Check Out The Events</span>
+                    </button>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+
+<!-- Contact Us Section -->
+<div style="padding: 4rem;" id="contact-us">
+    <hr style="width: 100%; margin: auto;">
+    <div class="contact-us-container">
+        <div style="display: flex; flex-direction: column;gap: 1rem;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="images/vir.jpg" alt="" style="height: 40px; width: 40px; border-radius: 9999px;">
+                <h3 >Virtual Umbrella</h3>
+            </div>
+            <h4>Copyright <span style="color: cyan;">Virtual</span> Umbrella 2023</h4>
+        </div>
+        <div style="display: flex;margin-top: 10px; gap: 10rem;">
+            <div style="display: flex;flex-direction: column;">
+                <h4>talk to us</h4>
+                <p style="margin: 0;"><a href="mailto:VirtualUmbrella@outlook.com">VirtualUmbrella@outlook.com</a></p>
+                <p style="margin: 0;"><a href="tel:+923123113049">+923123113049</a></p>
+            </div>
+            <div style="display: flex;flex-direction: column;">
+                <h4>follow us</h4>
+                <div style="display: flex; gap: 5px;">
+                    <a href="https://www.facebook.com/profile.php?id=61554577901875&mibextid=ZbWKwL" target="_blank">
+                        <div style="border: 1px solid white; display: flex; justify-content: center; align-items: center; padding: 10px; border-radius: 100%;">
+                            <img src="images/facebook.svg" alt="" style="height: 20px; width: 20px;">
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/company/virtualumbrella123/" target="_blank">
+                        <div style="border: 1px solid white; display: flex; justify-content: center; align-items: center; padding: 10px; border-radius: 100%;">
+                            <img src="images/linkedin.svg" alt="" style="height: 20px; width: 20px;">
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/virtual.umbrella?igsh=NGVhN2U2NjQ0Yg==" target="_blank">
+                        <div style="border: 1px solid white; display: flex; justify-content: center; align-items: center; padding: 10px; border-radius: 100%;">
+                            <img src="images/instagram.svg" alt="" style="height: 20px; width: 20px;">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="content-container">
+        <div class="contact-container a">
+        <div class="contact-link">
+
+        <h2>Contact Us</h2>
+        <p>Email: <a href="mailto:VirtualUmbrella@outlook.com">VirtualUmbrella@outlook.com</a></p>
+        <p>Phone number: <a href="tel:+923123113049">+923123113049</a></p>
+    </div> -->
+</section>
+
+
+
+
+
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Virtual Events</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <style>
+      .tab {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 1000px;
+        margin: auto;
+        gap: 5px;
+        padding: 5px;
+        border: 1px solid white;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        justify-content: center;
+      }
+
+      .tab-btn {
+        min-width: 120px;
+        text-align: center;
+        cursor: pointer;
+        padding: 4px 18px;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        color: white;
+      }
+
+      .tab-btn:hover {
+        border-color: white;
+      }
+
+      /* Style for active tab */
+      .active {
+        background-color: #f1f1f1;
+        color: black;
+      }
+
+      /* Style for content */
+      .tab-content {
+        display: none;
+        background-color: #f9fcff;
+        background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);
+
+      }
+
+      /* Show content when tab is active */
+      .tab-content.active {
+        display: block;
+        padding: 4rem;
+        border-radius: 20px;
+      }
+
+      form {
+        max-width: 600px;
+        margin: 0 auto;
+        background: rgb(227,227,243);
+        background: linear-gradient(90deg, rgba(227,227,243,1) 0%, rgba(244,223,223,1) 32%, rgba(216,241,246,1) 87%);
+
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+        border: 1px solid black;
+        border-radius: 4px;
+        background: transparent;
+      }
+
+      input[type="checkbox"] {
+        margin-right: 8px;
+      }
+
+      input[type="submit"] {
+        background-color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      input[type="submit"]:hover {
+        background-color: white;
+      }
+
+      .pop-up-container {
+        display: none;
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.7);
+        height: 100vh;
+        width: 100vw;
+        z-index: 10;
+      }
+
+      .pop-up {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 500px;
+        height: 200px;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: 1px 1px 1px lightgray;
+        transform: translate(-50%, -50%);
+      }
+
+      .contact-us-container{
+            display: flex;
+            padding-top: 2rem;
+            justify-content: space-between;
+        }
+      .contact-us-container a,h3,h4{
+          color: white;
+          margin: 0;
+      }
+      .navbar{
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            padding-left: 6rem;
+            display: flex;
+            gap: 10rem;
+            align-items: center;
+        }
+        .navbar h2,h4{
+            color: white;
+        }
+        .navbar h2,h4:hover{
+             color: cyan;
+             text-decoration: underline;
+        }
+    </style>
+    <div class="navbar">
+        <div><a href="index.html"><h2 style="margin: 0;color: white;text-decoration: none;">Virtual <span style="color: cyan;">Umbrella</span></h2></a></div>
+        <div style="display: flex; align-items: center; gap: 30px;">
+            <a href="index.html#features"><h4>Features</h4></a>
+            <a href="index.html#about-us"><h4>About Us</h4></a>
+            <a href="forms.html"><h4>Events</h4></a>
+            <a href="index.html#contact-us"><h4>Contact Us</h4></a>
+        </div>
+    </div>
+    <noscript
+      ><link rel="stylesheet" href="assets/css/noscript.css"
+    /></noscript>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function() {
+          // https://dashboard.emailjs.com/admin/account
+          emailjs.init('tzinxAiYXPQ_uI1TO');
+      })();
+  </script>
+  </head>
+  <body style="position: relative;">
+    <div class="pop-up-container" id="pop-up">
+      <div class="pop-up">
+        <div style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <div style="display: flex; align-items: center; gap: 30px;">
+            <h3>Application recieved. You will be contacted soon!</h1>
+            <p id="close-btn" style="cursor: pointer; color: red; font-weight: 900;">X</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="padding-top: 4rem; padding-left: 2rem; padding-right: 2rem">
+      <h1 style="text-align: center; color: white">Event Types</h1>
+      <hr style="border: 1px solid cyan" />
+      <div class="tab">
+        <div class="tab-btn active" onclick="showContent('tab1')">Webinar</div>
+        <div class="tab-btn" onclick="showContent('tab2')">
+          Online Conference
+        </div>
+        <div class="tab-btn" onclick="showContent('tab3')">Product Launch</div>
+        <div class="tab-btn" onclick="showContent('tab4')">Workshops</div>
+        <div class="tab-btn" onclick="showContent('tab5')">Online Exam</div>
+        <div class="tab-btn" onclick="showContent('tab6')">
+          Orientation Ceremony
+        </div>
+        <div class="tab-btn" onclick="showContent('tab7')">
+          Recruitment Drive and Interviews
+        </div>
+        <div class="tab-btn" onclick="showContent('tab8')">
+          Other (Please specify)
+        </div>
+        <div class="tab-btn" onclick="showContent('tab9')">
+          Consultancy services (Coming soon)
+        </div>
+      </div>
+
+      <!-- Content for each tab -->
+
+      <!-- Content for each tab 1 -->
+      <div id="tab1Content" class="tab-content active">
+        <h2 style="color: black">Questionnaire:</h2>
+        <form  id="form1">
+          <label for="name">1. Name:</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="organization">2. Name of Organization:</label>
+          <input type="text" id="organization" name="organization" required />
+
+          <label for="email">3. Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="contactNo">4. Contact No:</label>
+          <input type="tel" id="contactNo" name="contactNo" required />
+
+          <label for="webinarType"
+            >5. Which type of Webinar you want to organize? Briefly
+            describe:</label
+          >
+          <textarea
+            id="webinarType"
+            name="webinarType"
+            rows="4"
+            required
+          ></textarea>
+
+          <label for="targetAudience"
+            >6. Who is your target audience for the webinar?</label
+          >
+          <input
+            type="text"
+            id="targetAudience"
+            name="targetAudience"
+            required
+          />
+
+          <label for="preferredDateTime"
+            >7. Do you have a preferred date and time for the webinar? If yes,
+            please specify:</label
+          >
+          <input type="text" id="preferredDateTime" name="preferredDateTime" />
+
+          <label for="webinarTheme"
+            >8. Any specific theme for Webinar? If yes, please describe:</label
+          >
+          <textarea id="webinarTheme" name="webinarTheme" rows="4"></textarea>
+
+          <label for="numOfSessions"
+            >9. How many sessions you want? (1 Session = 2 hours)</label
+          >
+          <select id="numOfSessions" name="numOfSessions">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+
+          <label>10. Kindly select services you want:</label><br />
+          <input
+            type="checkbox"
+            id="hostForEvent"
+            class="services"
+            name="services"
+            value="Host for the event"
+          />
+          <label for="hostForEvent">Host for the event</label><br />
+
+          <input
+            type="checkbox"
+            id="eventMarketing"
+            class="services"
+            name="services"
+            value="Event Marketing"
+          />
+          <label for="eventMarketing">Event Marketing</label><br />
+
+          <input
+            type="checkbox"
+            id="registration"
+            class="services"
+            name="services"
+            value="Registration"
+          />
+          <label for="registration">Registration</label><br />
+
+          <input
+            type="checkbox"
+            id="eventRecording"
+            class="services"
+            name="services"
+            value="Event recording"
+          />
+          <label for="eventRecording">Event recording</label><br />
+
+          <input
+            type="checkbox"
+            id="managingTeam"
+            class="services"
+            name="services"
+            value="Managing team during event"
+          />
+          <label for="managingTeam">Managing team during event</label><br />
+
+          <input
+            type="checkbox"
+            id="pollsDuringEvent"
+            class="services"
+            name="services"
+            value="Polls during event"
+          />
+          <label for="pollsDuringEvent">Polls during event</label><br />
+
+          <input
+            type="checkbox"
+            id="postEventAnalytics"
+            class="services"
+            name="services"
+            value="Post event analytics"
+          />
+          <label for="postEventAnalytics">Post event analytics</label><br />
+
+          <label for="platform"
+            >11. Which platform you want to use for the event?</label
+          ><br />
+          <input
+            type="radio"
+            id="microsoftTeams"
+            name="platform"
+            value="Microsoft Teams"
+          />
+          <label for="microsoftTeams">Microsoft Teams</label><br />
+
+          <input
+            type="radio"
+            id="googleMeet"
+            name="platform"
+            value="Google Meet"
+          />
+          <label for="googleMeet">Google Meet</label><br />
+
+          <input type="radio" id="zoom" name="platform" value="Zoom" />
+          <label for="zoom">Zoom</label><br />
+
+          <input
+            type="radio"
+            id="goToWebinar"
+            name="platform"
+            value="Go to Webinar"
+          />
+          <label for="goToWebinar">Go to Webinar</label><br />
+
+          <input type="radio" id="webEx" name="platform" value="WebEx" />
+          <label for="webEx">WebEx</label><br />
+
+          <label for="customization"
+            >11. Any customization/further features you require? Please
+            specify:</label
+          >
+          <textarea id="customization" name="customization" rows="4"></textarea>
+
+          <div style="display: flex; justify-content: center">
+            <input type="submit" value="Get Quotation" />
+          </div>
+        </form>
+      </div>
+
+
+      
+      <!-- Content for each tab2 -->
+
+      <div id="tab2Content" class="tab-content">
+        <h2 style="color: black">Questionnaire:</h2>
+        <form  id="form2">
+
+          <label for="name">1. Name:</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="organization">2. Name of Organization:</label>
+          <input type="text" id="organization" name="organization" required />
+
+          <label for="email">3. Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="contactNo">4. Contact No:</label>
+          <input type="tel" id="contactNo" name="contactNo" required />
+
+          <label for="conferenceType"
+            >5. Which type of Conference you want to organize? Briefly
+            describe:</label
+          >
+          <textarea
+            id="conferenceType"
+            name="conferenceType"
+            rows="4"
+            required
+          ></textarea>
+
+          <label for="targetAudience"
+            >6. Who is your target audience for the conference?</label
+          >
+          <input
+            type="text"
+            id="targetAudience"
+            name="targetAudience"
+            required
+          />
+
+          <label for="preferredDateTime"
+            >7. Do you have a preferred date and time for the conference? If
+            yes, please specify:</label
+          >
+          <input type="text" id="preferredDateTime" name="preferredDateTime" />
+
+          <label for="conferenceTheme"
+            >8. Any specific theme for Conference? If yes, please
+            describe:</label
+          >
+          <textarea
+            id="conferenceTheme"
+            name="conferenceTheme"
+            rows="4"
+          ></textarea>
+
+          <label for="numOfSessions"
+            >9. How many sessions you want? (1 Session = 2 hours)</label
+          >
+          <select id="numOfSessions" name="numOfSessions">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+
+          <label>10. Kindly select services you want:</label><br />
+          <input
+            type="checkbox"
+            id="hostForEvent2"
+            name="services"
+            value="Host for the event"
+          />
+          <label for="hostForEvent2">Host for the event</label><br />
+
+          <input
+            type="checkbox"
+            id="eventMarketing2"
+            name="services"
+            value="Event Marketing"
+          />
+          <label for="eventMarketing2">Event Marketing</label><br />
+
+          <input
+            type="checkbox"
+            id="registration2"
+            name="services"
+            value="Registration"
+          />
+          <label for="registration2">Registration</label><br />
+
+          <input
+            type="checkbox"
+            id="eventRecording2"
+            name="services"
+            value="Event recording"
+          />
+          <label for="eventRecording2">Event recording</label><br />
+
+          <input
+            type="checkbox"
+            id="managingTeam2"
+            name="services"
+            value="Managing team during event"
+          />
+          <label for="managingTeam2">Managing team during event</label><br />
+
+          <input
+            type="checkbox"
+            id="pollsDuringEvent2"
+            name="services"
+            value="Polls during event"
+          />
+          <label for="pollsDuringEvent2">Polls during event</label><br />
+
+          <input
+            type="checkbox"
+            id="postEventAnalytics2"
+            name="services"
+            value="Post event analytics"
+          />
+          <label for="postEventAnalytics2">Post event analytics</label><br />
+
+          <label for="platform"
+            >11. Which platform you want to use for the event?</label
+          ><br />
+          <input
+            type="radio"
+            id="microsoftTeams2"
+            name="platform"
+            value="Microsoft Teams"
+          />
+          <label for="microsoftTeams2">Microsoft Teams</label><br />
+
+          <input
+            type="radio"
+            id="googleMeet2"
+            name="platform"
+            value="Google Meet"
+          />
+          <label for="googleMeet2">Google Meet</label><br />
+
+          <input type="radio" id="zoom2" name="platform" value="Zoom" />
+          <label for="zoom2">Zoom</label><br />
+
+          <input
+            type="radio"
+            id="goToWebinar2"
+            name="platform"
+            value="Go to Webinar"
+          />
+          <label for="goToWebinar2">Go to Webinar</label><br />
+
+          <input type="radio" id="webEx2" name="platform" value="WebEx" />
+          <label for="webEx2">WebEx</label><br />
+
+          <label for="customization"
+            >11. Any customization/further features you require? Please
+            specify:</label
+          >
+          <textarea id="customization" name="customization" rows="4"></textarea>
+
+          <div style="display: flex; justify-content: center">
+            <input type="submit" value="Get Quotation" />
+          </div>
+        </form>
+      </div>
+
+      <!-- Content for each tab3 -->
+
+      <div id="tab3Content" class="tab-content">
+        <h2 style="color: black">Questionnaire:</h2>
+        <form  id="form3">
+          <label for="name">1. Name:</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="organization">2. Name of Organization:</label>
+          <input type="text" id="organization" name="organization" required />
+
+          <label for="email">3. Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="contactNo">4. Contact No:</label>
+          <input type="tel" id="contactNo" name="contactNo" required />
+
+          <label for="productType"
+            >5. What is the product you are launching? Can you provide a brief
+            description of the product's features and benefits?</label
+          >
+          <textarea
+            id="productType"
+            name="productType"
+            rows="4"
+            required
+          ></textarea>
+
+          <label for="targetAudience"
+            >6. Who is your target audience for the product launch?</label
+          >
+          <input
+            type="text"
+            id="targetAudience"
+            name="targetAudience"
+            required
+          />
+
+          <label for="preferredDateTime"
+            >7. Do you have a preferred date and time for the launch? If yes,
+            please specify:</label
+          >
+          <input type="text" id="preferredDateTime" name="preferredDateTime" />
+
+          <label for="pTheme"
+            >8. Any specific theme for Product? If yes, please describe:</label
+          >
+          <textarea id="pTheme" name="pTheme" rows="4"></textarea>
+
+          <label for="numOfSessions"
+            >9. How many sessions you want? (1 Session = 2 hours)</label
+          >
+          <select id="numOfSessions" name="numOfSessions">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+
+          <label>10. Kindly select services you want:</label><br />
+          <input
+            type="checkbox"
+            id="hostForEvent3"
+            name="services"
+            value="Host for the event"
+          />
+          <label for="hostForEvent3">Host for the event</label><br />
+
+          <input
+            type="checkbox"
+            id="eventMarketing3"
+            name="services"
+            value="Event Marketing"
+          />
+          <label for="eventMarketing3">Event Marketing</label><br />
+
+          <input
+            type="checkbox"
+            id="registration3"
+            name="services"
+            value="Registration"
+          />
+          <label for="registration3">Registration</label><br />
+
+          <input
+            type="checkbox"
+            id="eventRecording3"
+            name="services"
+            value="Event recording"
+          />
+          <label for="eventRecording3">Event recording</label><br />
+
+          <input
+            type="checkbox"
+            id="managingTeam3"
+            name="services"
+            value="Managing team during event"
+          />
+          <label for="managingTeam3">Managing team during event</label><br />
+
+          <input
+            type="checkbox"
+            id="pollsDuringEvent3"
+            name="services"
+            value="Polls during event"
+          />
+          <label for="pollsDuringEvent3">Polls during event</label><br />
+
+          <input
+            type="checkbox"
+            id="postEventAnalytics3"
+            name="services"
+            value="Post event analytics"
+          />
+          <label for="postEventAnalytics3">Post event analytics</label><br />
+
+          <label for="platform"
+            >11. Which platform you want to use for the event?</label
+          ><br />
+          <input
+            type="radio"
+            id="microsoftTeams3"
+            name="platform"
+            value="Microsoft Teams"
+          />
+          <label for="microsoftTeams3">Microsoft Teams</label><br />
+
+          <input
+            type="radio"
+            id="googleMeet3"
+            name="platform"
+            value="Google Meet"
+          />
+          <label for="googleMeet3">Google Meet</label><br />
+
+          <input type="radio" id="zoom3" name="platform" value="Zoom" />
+          <label for="zoom3">Zoom</label><br />
+
+          <input
+            type="radio"
+            id="goToWebinar3"
+            name="platform"
+            value="Go to Webinar"
+          />
+          <label for="goToWebinar3">Go to Webinar</label><br />
+
+          <input type="radio" id="webEx3" name="platform" value="WebEx" />
+          <label for="webEx3">WebEx</label><br />
+
+          <label for="customization"
+            >11. Any customization/further features you require? Please
+            specify:</label
+          >
+          <textarea id="customization" name="customization" rows="4"></textarea>
+
+          <div style="display: flex; justify-content: center">
+            <input type="submit" value="Get Quotation" />
+          </div>
+        </form>
+      </div>
+
+      <!-- Content for each tab4 -->
+
+      <div id="tab4Content" class="tab-content">
+        <h2 style="color: black">Questionnaire:</h2>
+        <form  id="form4">
+          <label for="name">1. Name:</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="organization">2. Name of Organization:</label>
+          <input type="text" id="organization" name="organization" required />
+
+          <label for="email">3. Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="contactNo">4. Contact No:</label>
+          <input type="tel" id="contactNo" name="contactNo" required />
+
+          <label for="wType"
+            >5. What is the main topic or theme of the workshop?</label
+          >
+          <textarea
+            id="workType"
+            name="workType"
+            rows="4"
+            required
+          ></textarea>
+
+          <label for="targetAudience"
+            >6. Who is the intended audience for the workshop?</label
+          >
+          <input
+            type="text"
+            id="targetAudience"
+            name="targetAudience"
+            required
+          />
+
+          <label for="preferredDateTime"
+            >7. Do you have a preferred date and time for the workshop? If yes,
+            please specify:</label
+          >
+          <input type="text" id="preferredDateTime" name="preferredDateTime" />
+
+          <label for="wTheme"
+            >7. Will there be any workshop materials or resources provided to
+            participants?:</label
+          >
+          <textarea id="wTheme" name="wTheme" rows="4"></textarea>
+
+          <label for="numOfSessions"
+            >9. How many sessions you want? (1 Session = 2 hours)</label
+          >
+          <select id="numOfSessions" name="numOfSessions">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+
+          <label>10. Kindly select services you want:</label><br />
+          <input
+            type="checkbox"
+            id="hostForEvent4"
+            name="services"
+            value="Host for the event"
+          />
+          <label for="hostForEvent4">Host for the event</label><br />
+
+          <input
+            type="checkbox"
+            id="eventMarketing4"
+            name="services"
+            value="Event Marketing"
+          />
+          <label for="eventMarketing4">Event Marketing</label><br />
+
+          <input
+            type="checkbox"
+            id="registration4"
+            name="services"
+            value="Registration"
+          />
+          <label for="registration4">Registration</label><br />
+
+          <input
+            type="checkbox"
+            id="eventRecording4"
+            name="services"
+            value="Event recording"
+          />
+          <label for="eventRecording4">Event recording</label><br />
+
+          <input
+            type="checkbox"
+            id="managingTeam4"
+            name="services"
+            value="Managing team during event"
+          />
+          <label for="managingTeam4">Managing team during event</label><br />
+
+          <input
+            type="checkbox"
+            id="pollsDuringEvent4"
+            name="services"
+            value="Polls during event"
+          />
+          <label for="pollsDuringEvent4">Polls during event</label><br />
+
+          <input
+            type="checkbox"
+            id="postEventAnalytics4"
+            name="services"
+            value="Post event analytics"
+          />
+          <label for="postEventAnalytics4">Post event analytics</label><br />
+
+          <label for="platform"
+            >11. Which platform you want to use for the event?</label
+          ><br />
+          <input
+            type="radio"
+            id="microsoftTeams4"
+            name="platform"
+            value="Microsoft Teams"
+          />
+          <label for="microsoftTeams4">Microsoft Teams</label><br />
+
+          <input
+            type="radio"
+            id="googleMeet4"
+            name="platform"
+            value="Google Meet"
+          />
+          <label for="googleMeet4">Google Meet</label><br />
+
+          <input type="radio" id="zoom4" name="platform" value="Zoom" />
+          <label for="zoom4">Zoom</label><br />
+
+          <input
+            type="radio"
+            id="goToWebinar4"
+            name="platform"
+            value="Go to Webinar"
+          />
+          <label for="goToWebinar4">Go to Webinar</label><br />
+
+          <input type="radio" id="webEx4" name="platform" value="WebEx" />
+          <label for="webEx4">WebEx</label><br />
+
+          <label for="customization"
+            >11. Any customization/further features you require? Please
+            specify:</label
+          >
+          <textarea id="customization" name="customization" rows="4"></textarea>
+
+          <div style="display: flex; justify-content: center">
+            <input type="submit" value="Get Quotation" />
+          </div>
+        </form>
+      </div>
+
+      <!-- Content for each tab 5-->
+
+      <div id="tab5Content" class="tab-content">
+        <h2 style="color: black">Questionnaire:</h2>
+        <form  id="form5">
+          <label for="name">1. Name:</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="organization">2. Name of Organization:</label>
+          <input type="text" id="organization" name="organization" required />
+
+          <label for="email">3. Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="contactNo">4. Contact No:</label>
+          <input type="tel" id="contactNo" name="contactNo" required />
+
+          <label for="oType"
+            >5. What is the subject of the online exam?</label
+          >
+          <textarea
+            id="oType"
+            name="oType"
+            rows="4"
+            required
+          ></textarea>
+
+          <label for="participantsExpected"
+            >6. How many participants are expected to take the exam?</label
+          >
+          <select id="participantsExpected" name="participantsExpected">
+            <option value="1">Less than 20</option>
+            <option value="2">20 to 50</option>
+            <option value="3">50 to 100</option></select
+          ><br />
+
+          <label for="targetAudience"
+            >6. Who is the intended audience for the workshop?</label
+          >
+          <input
+            type="text"
+            id="targetAudience"
+            name="targetAudience"
+            required
+          />
+
+          <label for="preferredDateTime"
+            >7. What is the date and time for the exam? please specify:</label
+          >
+          <input type="text" id="preferredDateTime" name="preferredDateTime" />
+
+          <label for="numOfSessions"
+            >9. How many sessions you want? (1 Session = 2 hours)</label
+          >
+          <select id="numOfSessions" name="numOfSessions">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+
+          <label>10. Kindly select services you want:</label><br />
+          <input
+            type="checkbox"
+            id="hostForEvent5"
+            name="services"
+            value="Host for the event"
+          />
+          <label for="hostForEvent5">Monitoring during the exam</label><br />
+
+          <input
+            type="checkbox"
+            id="eventMarketing5"
+            name="services"
+            value="Event Marketing"
+          />
+          <label for="eventMarketing5">Pre exam briefing</label><br />
+
+          <input
+            type="checkbox"
+            id="registration5"
+            name="services"
+            value="Registration"
+          />
+          <label for="registration5">Preparing exam paper</label><br />
+
+          <input
+            type="checkbox"
+            id="eventRecording5"
+            name="services"
+            value="Event recording"
+          />
+          <label for="eventRecording5">Registration of participants</label
+          ><br />
+
+          <input
+            type="checkbox"
+            id="managingTeam5"
+            name="services"
+            value="Managing team during event"
+          />
+          <label for="managingTeam5">Grading and results compilations</label
+          ><br />
+
+          <input
+            type="checkbox"
+            id="pollsDuringEvent5"
+            name="services"
+            value="Polls during event"
+          />
+          <label for="pollsDuringEvent5">Post exam report</label><br />
+
+          <label for="platform"
+            >11. Which platform you want to use for the event?</label
+          ><br />
+          <input
+            type="radio"
+            id="microsoftTeams5"
+            name="platform"
+            value="Microsoft Teams"
+          />
+          <label for="microsoftTeams5">Microsoft Teams</label><br />
+
+          <input
+            type="radio"
+            id="googleMeet5"
+            name="platform"
+            value="Google Meet"
+          />
+          <label for="googleMeet5">Google Meet</label><br />
+
+          <input type="radio" id="zoom5" name="platform" value="Zoom" />
+          <label for="zoom5">Zoom</label><br />
+
+          <label for="customization"
+            >11. Any customization/further features you require? Please
+            specify:</label
+          >
+          <textarea id="customization" name="customization" rows="4"></textarea>
+
+          <div style="display: flex; justify-content: center">
+            <input type="submit" value="Get Quotation" />
+          </div>
+        </form>
+      </div>
+
+      <!-- Content for each tab 6 -->
+
+      <div id="tab6Content" class="tab-content">
+        <h2 style="color: black">Questionnaire:</h2>
+        <form  id="form6">
+          <label for="name">1. Name:</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="organization">2. Name of Organization:</label>
+          <input type="text" id="organization" name="organization" required />
+
+          <label for="email">3. Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="contactNo">4. Contact No:</label>
+          <input type="tel" id="contactNo" name="contactNo" required />
+
+          <label for="orType"
+            >5. What type of organization are you? Briefly describe</label
+          >
+          <textarea
+            id="orType"
+            name="orType"
+            rows="4"
+            required
+          ></textarea>
+
+          <label for="targetAudience"
+            >6. Who is the intended audience for the orientation
+            ceremony?</label
+          >
+          <input
+            type="text"
+            id="targetAudience"
+            name="targetAudience"
+            required
+          />
+
+          <label for="preferredDateTime"
+            >7. Do you have a preferred date and time for the event? If yes,
+            please specify:</label
+          >
+          <input type="text" id="preferredDateTime" name="preferredDateTime" />
+
+          <label for="eTheme"
+            >8. How do you envision the format of the orientation ceremony?
+            (e.g., presentations, interactive sessions)</label
+          >
+          <textarea id="eTheme" name="eTheme" rows="4"></textarea>
+
+          <label for="numOfSessions"
+            >9. How many sessions you want? (1 Session = 2 hours)</label
+          >
+          <select id="numOfSessions" name="numOfSessions">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+
+          <label>10. Kindly select services you want:</label><br />
+          <input
+            type="checkbox"
+            id="hostForEvent6"
+            name="services"
+            value="Host for the event"
+          />
+          <label for="hostForEvent6">Host for the event</label><br />
+
+          <input
+            type="checkbox"
+            id="eventMarketing6"
+            name="services"
+            value="Event Marketing"
+          />
+          <label for="eventMarketing6">Event Marketing</label><br />
+
+          <input
+            type="checkbox"
+            id="registration6"
+            name="services"
+            value="Registration"
+          />
+          <label for="registration6">Registration</label><br />
+
+          <input
+            type="checkbox"
+            id="eventRecording6"
+            name="services"
+            value="Event recording"
+          />
+          <label for="eventRecording6">Event recording</label><br />
+
+          <input
+            type="checkbox"
+            id="managingTeam6"
+            name="services"
+            value="Managing team during event"
+          />
+          <label for="managingTeam6">Managing team during event</label><br />
+
+          <input
+            type="checkbox"
+            id="pollsDuringEvent6"
+            name="services"
+            value="Polls during event"
+          />
+          <label for="pollsDuringEvent6">Polls during event</label><br />
+
+          <input
+            type="checkbox"
+            id="postEventAnalytics6"
+            name="services"
+            value="Post event analytics"
+          />
+          <label for="postEventAnalytics6">Post event analytics</label><br />
+
+          <label for="platform"
+            >11. Which platform you want to use for the event?</label
+          ><br />
+          <input
+            type="radio"
+            id="microsoftTeams6"
+            name="platform"
+            value="Microsoft Teams"
+          />
+          <label for="microsoftTeams6">Microsoft Teams</label><br />
+
+          <input
+            type="radio"
+            id="googleMeet6"
+            name="platform"
+            value="Google Meet"
+          />
+          <label for="googleMeet6">Google Meet</label><br />
+
+          <input type="radio" id="zoom6" name="platform2" value="Zoom" />
+          <label for="zoom6">Zoom</label><br />
+
+          <input
+            type="radio"
+            id="goToWebinar6"
+            name="platform"
+            value="Go to Webinar"
+          />
+          <label for="goToWebinar6">Go to Webinar</label><br />
+
+          <input type="radio" id="webEx6" name="platform" value="WebEx" />
+          <label for="webEx6">WebEx</label><br />
+
+          <label for="customization"
+            >11. Any customization/further features you require? Please
+            specify:</label
+          >
+          <textarea id="customization" name="customization" rows="4"></textarea>
+
+          <div style="display: flex; justify-content: center">
+            <input type="submit" value="Get Quotation" />
+          </div>
+        </form>
+      </div>
+
+      <!-- Content for each tab 7-->
+
+      <div id="tab7Content" class="tab-content">
+        <h2 style="color: black">Questionnaire:</h2>
+        <form  id="form7">
+          <label for="name">1. Name:</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="organization">2. Name of Organization:</label>
+          <input type="text" id="organization" name="organization" required />
+
+          <label for="email">3. Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="contactNo">4. Contact No:</label>
+          <input type="tel" id="contactNo" name="contactNo" required />
+
+          <label for="rType"
+            >5. What positions or roles are you recruiting for during the
+            drive?</label
+          >
+          <textarea
+            id="rType"
+            name="rType"
+            rows="4"
+            required
+          ></textarea>
+
+          <label for="targetAudience"
+            >6. Are there specific skills or qualifications you are seeking in
+            candidates?</label
+          >
+          <input
+            type="text"
+            id="targetAudience"
+            name="targetAudience"
+            required
+          />
+
+          <label for="preferredDateTime"
+            >7. What is the timeline for the recruitment drive, including key
+            milestones and deadlines?</label
+          >
+          <input type="text" id="preferredDateTime" name="preferredDateTime" />
+
+          <label for="rTheme"
+            >8. Can you provide an overview of the entire recruitment process
+            from application to selection?</label
+          >
+          <textarea id="rTheme" name="rTheme" rows="4"></textarea>
+
+          <label for="numOfSessions"
+            >9. How many sessions you want? (1 Session = 2 hours)</label
+          >
+          <select id="numOfSessions" name="numOfSessions">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+
+          <label>10. Kindly select services you want:</label><br />
+          <input
+            type="checkbox"
+            id="hostForEvent7"
+            name="services"
+            value="Host for the event"
+          />
+          <label for="hostForEvent7">Marketing the recruitment drive</label
+          ><br />
+
+          <input
+            type="checkbox"
+            id="eventMarketing7"
+            name="services"
+            value="Event Marketing"
+          />
+          <label for="eventMarketing7">Managing the recruitment drive</label
+          ><br />
+
+          <input
+            type="checkbox"
+            id="registration7"
+            name="services"
+            value="Registration"
+          />
+          <label for="registration7">Managing team during interviews</label
+          ><br />
+
+          <input
+            type="checkbox"
+            id="eventRecording7"
+            name="services"
+            value="Event recording"
+          />
+          <label for="eventRecording7">Post event analytics</label><br />
+
+          <label for="platform"
+            >11. Which platform you want to use for the event?</label
+          ><br />
+          <input
+            type="radio"
+            id="microsoftTeams7"
+            name="platform"
+            value="Microsoft Teams"
+          />
+          <label for="microsoftTeams7">Microsoft Teams</label><br />
+
+          <input
+            type="radio"
+            id="googleMeet7"
+            name="platform"
+            value="Google Meet"
+          />
+          <label for="googleMeet7">Google Meet</label><br />
+
+          <input type="radio" id="zoom7" name="platform" value="Zoom" />
+          <label for="zoom7">Zoom</label><br />
+
+          <label for="customization"
+            >11. Any customization/further features you require? Please
+            specify:</label
+          >
+          <textarea id="customization" name="customization" rows="4"></textarea>
+
+          <div style="display: flex; justify-content: center">
+            <input type="submit" value="Get Quotation" />
+          </div>
+        </form>
+      </div>
+
+      <!-- Content for each tab 8-->
+
+      <div id="tab8Content" class="tab-content">
+        <h2 style="color: black">Questionnaire:</h2>
+        <form  id="form8">
+          <label for="name">1. Name:</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="organization">2. Name of Organization:</label>
+          <input type="text" id="organization" name="organization" required />
+
+          <label for="email">3. Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="contactNo">4. Contact No:</label>
+          <input type="tel" id="contactNo" name="contactNo" required />
+
+          <label for="Type"
+            >5. Which type of event you want to organize?</label
+          >
+          <textarea
+            id="Type"
+            name="Type"
+            rows="4"
+            required
+          ></textarea>
+
+          <label for="targetAudience"
+            >6. Who is your target audience for event?</label
+          >
+          <input
+            type="text"
+            id="targetAudience"
+            name="targetAudience"
+            required
+          />
+
+          <label for="preferredDateTime"
+            >7. Do you have a preferred date and time for the event? If yes,
+            please specify:</label
+          >
+          <input type="text" id="preferredDateTime" name="preferredDateTime" />
+
+          <label for="Theme"
+            >8. Any specific theme for event? If yes, please describe:</label
+          >
+          <textarea id="Theme" name="Theme" rows="4"></textarea>
+
+          <label for="numOfSessions"
+            >9. How many sessions you want? (1 Session = 2 hours)</label
+          >
+          <select id="numOfSessions" name="numOfSessions">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+
+          <label>10. Kindly select services you want:</label><br />
+          <input
+            type="checkbox"
+            id="hostForEvent8"
+            name="services"
+            value="Host for the event"
+          />
+          <label for="hostForEvent8">Host for the event</label><br />
+
+          <input
+            type="checkbox"
+            id="eventMarketing8"
+            name="services"
+            value="Event Marketing"
+          />
+          <label for="eventMarketing8">Event Marketing</label><br />
+
+          <input
+            type="checkbox"
+            id="registration8"
+            name="services"
+            value="Registration"
+          />
+          <label for="registration8">Registration</label><br />
+
+          <input
+            type="checkbox"
+            id="eventRecording8"
+            name="services"
+            value="Event recording"
+          />
+          <label for="eventRecording8">Event recording</label><br />
+
+          <input
+            type="checkbox"
+            id="managingTeam8"
+            name="services"
+            value="Managing team during event"
+          />
+          <label for="managingTeam8">Managing team during event</label><br />
+
+          <input
+            type="checkbox"
+            id="pollsDuringEvent8"
+            name="services"
+            value="Polls during event"
+          />
+          <label for="pollsDuringEvent8">Polls during event</label><br />
+
+          <input
+            type="checkbox"
+            id="postEventAnalytic8"
+            name="services"
+            value="Post event analytics"
+          />
+          <label for="postEventAnalytics8">Post event analytics</label><br />
+
+          <label for="platform"
+            >11. Which platform you want to use for the event?</label
+          ><br />
+          <input
+            type="radio"
+            id="microsoftTeams8"
+            name="platform"
+            value="Microsoft Teams"
+          />
+          <label for="microsoftTeams8">Microsoft Teams</label><br />
+
+          <input
+            type="radio"
+            id="googleMeet8"
+            name="platform"
+            value="Google Meet"
+          />
+          <label for="googleMeet8">Google Meet</label><br />
+
+          <input type="radio" id="zoom8" name="platform" value="Zoom" />
+          <label for="zoom8">Zoom</label><br />
+
+          <input
+            type="radio"
+            id="goToWebinar8"
+            name="platform"
+            value="Go to Webinar"
+          />
+          <label for="goToWebinar8">Go to Webinar</label><br />
+
+          <input type="radio" id="webEx8" name="platform" value="WebEx" />
+          <label for="webEx8">WebEx</label><br />
+
+          <label for="customization"
+            >11. Any customization/further features you require? Please
+            specify:</label
+          >
+          <textarea id="customization" name="customization" rows="4"></textarea>
+
+          <div style="display: flex; justify-content: center">
+            <input type="submit" value="Get Quotation" />
+          </div>
+        </form>
+      </div>
+
+      <!-- Content for each tab 9 -->
+      <div id="tab9Content" class="tab-content">
+        <p>Coming Soon</p>
+      </div>
+    </div>
+    <div style="padding: 4rem;">
+    <hr style="width: 100%; margin: auto;">
+    <div class="contact-us-container">
+        <div style="display: flex; flex-direction: column;gap: 1rem;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="images/vir.jpg" alt="" style="height: 40px; width: 40px; border-radius: 9999px;">
+                <h3 >Virtual Umbrella</h3>
+            </div>
+            <h4>Copyright <span style="color: cyan;">Virtual</span> Umbrella 2023</h4>
+        </div>
+        <div style="display: flex;margin-top: 10px; gap: 10rem;">
+            <div style="display: flex;flex-direction: column;">
+                <h4>talk to us</h4>
+                <p style="margin: 0;"><a href="mailto:VirtualUmbrella@outlook.com">VirtualUmbrella@outlook.com</a></p>
+                <p style="margin: 0;"><a href="tel:+923123113049">+923123113049</a></p>
+            </div>
+            <div style="display: flex;flex-direction: column;">
+                <h4>follow us</h4>
+                <div style="display: flex; gap: 5px;">
+                    <a href="https://www.facebook.com/profile.php?id=61554577901875&mibextid=ZbWKwL" target="_blank">
+                        <div style="border: 1px solid white; display: flex; justify-content: center; align-items: center; padding: 10px; border-radius: 100%;">
+                            <img src="images/facebook.svg" alt="" style="height: 20px; width: 20px;">
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/company/virtualumbrella123/" target="_blank">
+                        <div style="border: 1px solid white; display: flex; justify-content: center; align-items: center; padding: 10px; border-radius: 100%;">
+                            <img src="images/linkedin.svg" alt="" style="height: 20px; width: 20px;">
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/virtual.umbrella?igsh=NGVhN2U2NjQ0Yg==" target="_blank">
+                        <div style="border: 1px solid white; display: flex; justify-content: center; align-items: center; padding: 10px; border-radius: 100%;">
+                            <img src="images/instagram.svg" alt="" style="height: 20px; width: 20px;">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+      function showContent(tabId) {
+        // Hide all tab contents
+        var tabContents = document.querySelectorAll(".tab-content");
+        tabContents.forEach(function (content) {
+          content.classList.remove("active");
+        });
+
+        // Deactivate all tabs
+        var tabs = document.querySelectorAll(".tab-btn");
+        tabs.forEach(function (tab) {
+          tab.classList.remove("active");
+        });
+
+        // Show the selected tab content
+        document.getElementById(tabId + "Content").classList.add("active");
+
+        // Activate the selected tab
+        var selectedTab = document.querySelector(
+          "[onclick=\"showContent('" + tabId + "')\"]"
+        );
+        selectedTab.classList.add("active");
+      }
+    </script>
+  </body>
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery.scrollex.min.js"></script>
+  <script src="assets/js/jquery.scrolly.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+
+
+
+
+
+  <script>
+    document.getElementById("form1").addEventListener("submit", function (event) {
+      event.preventDefault();
+      let name = this.name.value;
+      let organization = this.organization.value;
+      let contactNo = this.contactNo.value;
+      let webinarType = this.webinarType.value;
+      let targetAudience = this.targetAudience.value;
+      let preferredDateTime = this.preferredDateTime.value;
+      let webinarTheme = this.webinarTheme.value;
+      let numOfSessions = this.numOfSessions.value;
+      let services = document.querySelectorAll("input[name='services']:checked");
+      let platform = document.querySelectorAll("input[name='platform']:checked");
+
+     
+
+      let servicesList = Array.from(services).map((service) => service.value)
+      servicesList = servicesList.join(",")
+
+      let platformList = Array.from(platform).map((platform) => platform.value)
+      platformList = platformList.join(",")
+
+
+      emailjs.send('service_mlvei4j', 'template_2ooergr', {
+        message: `
+          Data fetched from customer:
+
+          Name: ${name}
+          Organization: ${organization}
+          Email: ${email}
+          Contact No: ${contactNo}
+          Webinar Type : ${webinarType}
+          Target Audience : ${targetAudience}
+          PreferredDateTime : ${preferredDateTime}
+          Webinar Theme : ${webinarTheme}
+          Number Of Sessions : ${numOfSessions}
+          Services: ${servicesList}
+          Platform: ${platformList}
+  
+        `
+      }).then(function() {
+                        console.log('SUCCESS!');
+                        document.querySelector("#pop-up").style.display = "block"
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                    });
+    })
+  </script>
+
+
+
+<script>
+  document.getElementById("form2").addEventListener("submit", function (event) {
+    event.preventDefault();
+    let name = this.name.value;
+    let organization = this.organization.value;
+    let contactNo = this.contactNo.value;
+    let conferenceType = this.conferenceType.value;
+    let targetAudience = this.targetAudience.value;
+    let preferredDateTime = this.preferredDateTime.value;
+    let conferenceTheme = this.conferenceTheme.value;
+    let numOfSessions = this.numOfSessions.value;
+    let services = document.querySelectorAll("input[name='services']:checked");
+    let platform = document.querySelectorAll("input[name='platform']:checked");
+
+   
+
+    let servicesList = Array.from(services).map((service) => service.value)
+    servicesList = servicesList.join(",")
+
+    let platformList = Array.from(platform).map((platform) => platform.value)
+    platformList = platformList.join(",")
+
+
+    emailjs.send('service_mlvei4j', 'template_2ooergr', {
+      message: `
+        Data fetched from customer:
+
+        Name: ${name}
+        Organization: ${organization}
+        Email: ${email}
+        Contact No: ${contactNo}
+        Conference Type : ${conferenceType}
+        Target Audience : ${targetAudience}
+        PreferredDateTime : ${preferredDateTime}
+        Conference Theme : ${conferenceTheme}
+        Number Of Sessions : ${numOfSessions}
+        Services: ${servicesList}
+        Platform: ${platformList}
+
+      `
+    }).then(function() {
+                      console.log('SUCCESS!');
+                      document.querySelector("#pop-up").style.display = "block"
+                  }, function(error) {
+                      console.log('FAILED...', error);
+                  });
+  })
+</script>
+
+
+
+<script>
+  document.getElementById("form3").addEventListener("submit", function (event) {
+    event.preventDefault();
+    let name = this.name.value;
+    let organization = this.organization.value;
+    let contactNo = this.contactNo.value;
+    let productType = this.productType.value;
+    let targetAudience = this.targetAudience.value;
+    let preferredDateTime = this.preferredDateTime.value;
+    let pTheme = this.pTheme.value;
+    let numOfSessions = this.numOfSessions.value;
+    let services = document.querySelectorAll("input[name='services']:checked");
+    let platform = document.querySelectorAll("input[name='platform']:checked");
+
+   
+
+    let servicesList = Array.from(services).map((service) => service.value)
+    servicesList = servicesList.join(",")
+
+    let platformList = Array.from(platform).map((platform) => platform.value)
+    platformList = platformList.join(",")
+
+
+    emailjs.send('service_mlvei4j', 'template_2ooergr', {
+      message: `
+        Data fetched from customer:
+
+        Name: ${name}
+        Organization: ${organization}
+        Email: ${email}
+        Contact No: ${contactNo}
+        Product Type : ${productType}
+        Target Audience : ${targetAudience}
+        PreferredDateTime : ${preferredDateTime}
+        Product Theme : ${pTheme}
+        Number Of Sessions : ${numOfSessions}
+        Services: ${servicesList}
+        Platform: ${platformList}
+
+      `
+    }).then(function() {
+                      console.log('SUCCESS!');
+                      document.querySelector("#pop-up").style.display = "block"
+                  }, function(error) {
+                      console.log('FAILED...', error);
+                  });
+  })
+</script>
+
+
+
+<script>
+  document.getElementById("form4").addEventListener("submit", function (event) {
+    event.preventDefault();
+    let name = this.name.value;
+    let organization = this.organization.value;
+    let contactNo = this.contactNo.value;
+    let workType = this.workType.value;
+    let targetAudience = this.targetAudience.value;
+    let preferredDateTime = this.preferredDateTime.value;
+    let wTheme = this.wTheme.value;
+    let numOfSessions = this.numOfSessions.value;
+    let services = document.querySelectorAll("input[name='services']:checked");
+    let platform = document.querySelectorAll("input[name='platform']:checked");
+
+   
+
+    let servicesList = Array.from(services).map((service) => service.value)
+    servicesList = servicesList.join(",")
+
+    let platformList = Array.from(platform).map((platform) => platform.value)
+    platformList = platformList.join(",")
+
+
+    emailjs.send('service_mlvei4j', 'template_2ooergr', {
+      message: `
+        Data fetched from customer:
+
+        Name: ${name}
+        Organization: ${organization}
+        Email: ${email}
+        Contact No: ${contactNo}
+        Workshop Theme : ${workType}
+        Target Audience : ${targetAudience}
+        PreferredDateTime : ${preferredDateTime}
+        Workshop Materials : ${wTheme}
+        Number Of Sessions : ${numOfSessions}
+        Services: ${servicesList}
+        Platform: ${platformList}
+
+      `
+    }).then(function() {
+                      console.log('SUCCESS!');
+                      document.querySelector("#pop-up").style.display = "block"
+                  }, function(error) {
+                      console.log('FAILED...', error);
+                  });
+  })
+</script>
+
+
+
+
+<script>
+  document.getElementById("form5").addEventListener("submit", function (event) {
+    event.preventDefault();
+    let name = this.name.value;
+    let organization = this.organization.value;
+    let contactNo = this.contactNo.value;
+    let oType = this.oType.value;
+    let targetAudience = this.targetAudience.value;
+    let preferredDateTime = this.preferredDateTime.value;
+    let participantsExpected = this.participantsExpected.value;
+    let numOfSessions = this.numOfSessions.value;
+    let services = document.querySelectorAll("input[name='services']:checked");
+    let platform = document.querySelectorAll("input[name='platform']:checked");
+
+   
+
+    let servicesList = Array.from(services).map((service) => service.value)
+    servicesList = servicesList.join(",")
+
+    let platformList = Array.from(platform).map((platform) => platform.value)
+    platformList = platformList.join(",")
+
+
+    emailjs.send('service_mlvei4j', 'template_2ooergr', {
+      message: `
+        Data fetched from customer:
+
+        Name: ${name}
+        Organization: ${organization}
+        Email: ${email}
+        Contact No: ${contactNo}
+        Exam Subject : ${oType}
+        Target Audience : ${targetAudience}
+        PreferredDateTime : ${preferredDateTime}
+        Participants Expected : ${participantsExpected}
+        Number Of Sessions : ${numOfSessions}
+        Services: ${servicesList}
+        Platform: ${platformList}
+
+      `
+    }).then(function() {
+                      console.log('SUCCESS!');
+                      document.querySelector("#pop-up").style.display = "block"
+                  }, function(error) {
+                      console.log('FAILED...', error);
+                  });
+  })
+</script>
+
+
+
+
+
+<script>
+  document.getElementById("form6").addEventListener("submit", function (event) {
+    event.preventDefault();
+    let name = this.name.value;
+    let organization = this.organization.value;
+    let contactNo = this.contactNo.value;
+    let orType = this.orType.value;
+    let targetAudience = this.targetAudience.value;
+    let preferredDateTime = this.preferredDateTime.value;
+    let eTheme = this.eTheme.value;
+    let numOfSessions = this.numOfSessions.value;
+    let services = document.querySelectorAll("input[name='services']:checked");
+    let platform = document.querySelectorAll("input[name='platform']:checked");
+
+   
+
+    let servicesList = Array.from(services).map((service) => service.value)
+    servicesList = servicesList.join(",")
+
+    let platformList = Array.from(platform).map((platform) => platform.value)
+    platformList = platformList.join(",")
+
+
+    emailjs.send('service_mlvei4j', 'template_2ooergr', {
+      message: `
+        Data fetched from customer:
+
+        Name: ${name}
+        Organization: ${organization}
+        Email: ${email}
+        Contact No: ${contactNo}
+        Organization Type : ${orType}
+        Target Audience : ${targetAudience}
+        PreferredDateTime : ${preferredDateTime}
+        Ceremony Format : ${eTheme}
+        Number Of Sessions : ${numOfSessions}
+        Services: ${servicesList}
+        Platform: ${platformList}
+
+      `
+    }).then(function() {
+                      console.log('SUCCESS!');
+                      document.querySelector("#pop-up").style.display = "block"
+                  }, function(error) {
+                      console.log('FAILED...', error);
+                  });
+  })
+</script>
+
+
+
+
+<script>
+  document.getElementById("form7").addEventListener("submit", function (event) {
+    event.preventDefault();
+    let name = this.name.value;
+    let organization = this.organization.value;
+    let contactNo = this.contactNo.value;
+    let rType = this.rType.value;
+    let targetAudience = this.targetAudience.value;
+    let preferredDateTime = this.preferredDateTime.value;
+    let rTheme = this.rTheme.value;
+    let numOfSessions = this.numOfSessions.value;
+    let services = document.querySelectorAll("input[name='services']:checked");
+    let platform = document.querySelectorAll("input[name='platform']:checked");
+
+   
+
+    let servicesList = Array.from(services).map((service) => service.value)
+    servicesList = servicesList.join(",")
+
+    let platformList = Array.from(platform).map((platform) => platform.value)
+    platformList = platformList.join(",")
+
+
+    emailjs.send('service_mlvei4j', 'template_2ooergr', {
+      message: `
+        Data fetched from customer:
+
+        Name: ${name}
+        Organization: ${organization}
+        Email: ${email}
+        Contact No: ${contactNo}
+        Recruitment Type : ${rType}
+        Target Audience : ${targetAudience}
+        PreferredDateTime : ${preferredDateTime}
+        Recruitment Overview : ${rTheme}
+        Number Of Sessions : ${numOfSessions}
+        Services: ${servicesList}
+        Platform: ${platformList}
+
+      `
+    }).then(function() {
+                      console.log('SUCCESS!');
+                      document.querySelector("#pop-up").style.display = "block"
+                  }, function(error) {
+                      console.log('FAILED...', error);
+                  });
+  })
+</script>
+
+
+
+
+
+
+<script>
+  document.getElementById("form8").addEventListener("submit", function (event) {
+    event.preventDefault();
+    let name = this.name.value;
+    let organization = this.organization.value;
+    let contactNo = this.contactNo.value;
+    let Type = this.Type.value;
+    let targetAudience = this.targetAudience.value;
+    let preferredDateTime = this.preferredDateTime.value;
+    let Theme = this.Theme.value;
+    let numOfSessions = this.numOfSessions.value;
+    let services = document.querySelectorAll("input[name='services']:checked");
+    let platform = document.querySelectorAll("input[name='platform']:checked");
+
+   
+
+    let servicesList = Array.from(services).map((service) => service.value)
+    servicesList = servicesList.join(",")
+
+    let platformList = Array.from(platform).map((platform) => platform.value)
+    platformList = platformList.join(",")
+
+
+    emailjs.send('service_mlvei4j', 'template_2ooergr', {
+      message: `
+        Data fetched from customer:
+
+        Name: ${name}
+        Organization: ${organization}
+        Email: ${email}
+        Contact No: ${contactNo}
+        Event Type : ${Type}
+        Target Audience : ${targetAudience}
+        PreferredDateTime : ${preferredDateTime}
+        Event Theme : ${Theme}
+        Number Of Sessions : ${numOfSessions}
+        Services: ${servicesList}
+        Platform: ${platformList}
+
+      `
+    }).then(function() {
+                      console.log('SUCCESS!');
+                      document.querySelector("#pop-up").style.display = "block"
+                  }, function(error) {
+                      console.log('FAILED...', error);
+                  });
+  })
+</script>
+
+
+<script>
+  document.querySelector("#close-btn").addEventListener("click", function () {
+    document.querySelector("#pop-up").style.display = "none"
+  })
+</script>
+
+
+</html>
